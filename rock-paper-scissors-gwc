@@ -1,0 +1,82 @@
+//See instructions on how to play at the bottom of the page!
+
+import UIKit
+
+func opponentAction() -> String {
+    let randomNum = arc4random_uniform(3)
+    switch randomNum {
+    case 0:
+        return "rock"
+    case 1:
+        return "paper"
+    case 2:
+        return "scissors"
+    default:
+        return "error"
+    }
+}
+
+func checkPlayerAction(action:String) -> String {
+    let lowercaseAction = action.lowercased()
+    if lowercaseAction == "rock" || lowercaseAction == "paper" || lowercaseAction == "scissors" {
+        return lowercaseAction
+    } else {
+        return "error"
+    }
+}
+
+func compete(playerAction:String, opponentAction:String) {
+    print("Let's play rock paper scissors!")
+    print("You chose " + playerAction)
+    print("Your opponent chose " + opponentAction)
+    let playerActionConf = checkPlayerAction(action:playerAction)
+    let lost:String = "You lost! Better luck next time! \n"
+    let won:String = "You won! Congratulations!\n"
+    if(playerActionConf == "error" || opponentAction == "error") {
+        print("Player input was not valid. Please choose from rock, paper, or scissors.\n")
+    } else {
+        if opponentAction == playerActionConf {
+            print("Tie!\n")
+        } else {
+            switch playerActionConf {
+            case "rock":
+                if opponentAction == "paper" {
+                    print(lost)
+                } else if opponentAction == "scissors" {
+                    print(won)
+                }
+            case "paper":
+                if opponentAction == "rock" {
+                    print(won)
+                } else if opponentAction == "scissors" {
+                    print(lost)
+                }
+            case "scissors":
+                if opponentAction == "rock" {
+                    print(lost)
+                } else if opponentAction == "paper"{
+                    print(won)
+                }
+            default:
+                print("An error occurred. Please try again\n")
+            }
+        }
+    }
+    
+}
+//MARK: Playing the game
+//Welcome to my rock, paper, scissors game! Since there is no user input option on Xcode playground, play by choosing an action and passing it as the playerAction parameter in the compete() function below
+compete(playerAction:"Your input here!", opponentAction:opponentAction())
+
+//for example
+print("\nTest cases")
+compete(playerAction:"PAPER", opponentAction:opponentAction())
+compete(playerAction:"scissors", opponentAction:opponentAction())
+compete(playerAction:"rock", opponentAction:opponentAction())
+
+
+
+
+
+
+
